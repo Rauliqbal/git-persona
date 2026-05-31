@@ -1,3 +1,25 @@
+Fitur MVP :
+<!-- ✅ -->
+## Phase 1
+- Form generator
+- Live preview README
+- Copy markdown
+- Download .md
+- 5 template
+
+## Phase 2
+
+-  GitHub username autofill
+-  Stats card generator
+-  Theme system
+
+## Phase 3
+
+-  AI rewrite bio
+-  Drag & drop section
+-  Public share link
+
+---
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
