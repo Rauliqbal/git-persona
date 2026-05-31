@@ -14,9 +14,6 @@ export default function PreviewPanel() {
                 Preview
               </TabsTrigger>
 
-              <TabsTrigger value="markdown">
-                Raw Markdown
-              </TabsTrigger>
             </TabsList>
 
           </Tabs>
