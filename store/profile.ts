@@ -46,7 +46,7 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 
   nextStep: () =>
     set((state) => ({
-      step: Math.min(state.step + 1, 4),
+      step: Math.min(state.step + 1, 5),
     })),
 
   prevStep: () =>

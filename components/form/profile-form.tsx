@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import StepIndicator from "./step-indicator";
+import PreviewPanel from "../preview/preview-panel";
 
 export default function ProfileForm() {
   const {
@@ -66,6 +67,7 @@ export default function ProfileForm() {
     "Links",
     "Socials",
     "Skills",
+    "Preview",
   ];
 
   const handleAddSkill = () => {
@@ -77,6 +79,8 @@ export default function ProfileForm() {
 
   return (
     <div className="p-8">
+      <StepIndicator currentStep={step} steps={steps} />
+
       <Card>
         <CardHeader>
           <CardTitle>
@@ -90,10 +94,6 @@ export default function ProfileForm() {
         </CardHeader>
 
         <CardContent>
-
-          {/* Step Indicator */}
-          <StepIndicator currentStep={step} steps={steps} />
-
           {/* STEP 1 */}
           {step === 1 && (
             <div className="space-y-4">
@@ -243,6 +243,13 @@ export default function ProfileForm() {
             </div>
           )}
 
+          {/* STEP 5 */}
+          {step === 5 && (
+            <div className="space-y-4">
+             <PreviewPanel/>
+            </div>
+          )}
+
           {/* Navigation */}
           <div className="mt-8 flex justify-between">
 
@@ -254,7 +261,7 @@ export default function ProfileForm() {
               Previous
             </Button>
 
-            {step < 4 ? (
+            {step < 5 ? (
               <Button onClick={nextStep}>
                 Next
               </Button>

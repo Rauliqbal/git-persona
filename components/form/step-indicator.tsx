@@ -13,6 +13,7 @@ const descriptions = [
   "Portfolio, blog, resume",
   "Social media profiles",
   "Technologies you know",
+  "Review & generate",
 ];
 
 export default function StepIndicator({
@@ -20,8 +21,8 @@ export default function StepIndicator({
   steps,
 }: StepIndicatorProps) {
   return (
-    <div className="mb-10">
-      <div className="flex items-start justify-between">
+    <div className="mb-10 flex items-center justify-center overflow-x-auto px-4">
+      <div className="flex items-start min-w-max">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
 
@@ -41,12 +42,12 @@ export default function StepIndicator({
                   className={cn(
                     "flex h-12 w-12 items-center justify-center rounded-full border-2 font-semibold transition-all",
                     isActive &&
-                      "border-primary bg-primary text-primary-foreground",
+                    "border-primary bg-primary text-primary-foreground",
                     isCompleted &&
-                      "border-primary bg-primary text-primary-foreground",
+                    "border-primary bg-primary text-primary-foreground",
                     !isActive &&
-                      !isCompleted &&
-                      "border-muted-foreground/30 text-muted-foreground"
+                    !isCompleted &&
+                    "border-muted-foreground/30 text-muted-foreground"
                   )}
                 >
                   {isCompleted ? (
@@ -77,7 +78,7 @@ export default function StepIndicator({
               {index < steps.length - 1 && (
                 <div
                   className={cn(
-                    "mx-4 mt-6 h-0.5 flex-1",
+                    "mx-2 h-0.5 w-8 sm:mx-4 sm:w-12",
                     currentStep > stepNumber
                       ? "bg-primary"
                       : "bg-border"
