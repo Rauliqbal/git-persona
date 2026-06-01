@@ -220,10 +220,6 @@ export const categorizedSkills: CategorizedSkills = {
     skills: ['unity', 'unreal'],
   },
 
-  automation: {
-    title: 'Automation',
-    skills: ['zapier', 'ifttt'],
-  },
 
   other: {
     title: 'Other',

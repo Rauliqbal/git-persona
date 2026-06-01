@@ -24,7 +24,7 @@ export default function SkillsSection() {
           >
             <div className="relative w-4 h-4 bg-background rounded-sm p-0.5 flex items-center justify-center">
               <Image
-                src={`https://skillicons.dev/icons?i=${item}`}
+                src={`https://cdn.simpleicons.org/${item}`}
                 alt={item}
                 width={16}
                 height={16}
