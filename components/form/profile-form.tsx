@@ -59,8 +59,6 @@ export default function ProfileForm() {
     setInstagram,
   } = useProfileStore();
 
-
-
   const steps = [
     "Profile",
     "Links",
@@ -98,21 +96,22 @@ export default function ProfileForm() {
       <StepIndicator currentStep={step} steps={steps} />
 
       <Card>
-        <CardHeader>
-          <CardTitle>
-            Build your profile
-          </CardTitle>
-
-          <CardDescription>
-            Complete the fields below to generate
-            your custom GitHub README.
-          </CardDescription>
-        </CardHeader>
-
         <CardContent>
           {/* STEP 1 */}
           {step === 1 && (
             <div className="space-y-4">
+              <div>
+                <CardTitle>
+                  Build your profile
+                </CardTitle>
+
+                <CardDescription>
+                  Complete the fields below to generate
+                  your custom GitHub README.
+                </CardDescription>
+
+                <hr className="my-6 " />
+              </div>
 
               <FieldGroup className="grid md:grid-cols-2 gap-4">
                 <Field data-invalid={!!errors.fullName}>
@@ -209,7 +208,17 @@ export default function ProfileForm() {
           {/* STEP 2 */}
           {step === 2 && (
             <div className="space-y-4">
+              <div>
+                <CardTitle>
+                  Links
+                </CardTitle>
 
+                <CardDescription>
+                  Add links to your portfolio, blog, and resume
+                </CardDescription>
+
+                <hr className="my-6 " />
+              </div>
               <Input
                 placeholder="Portfolio URL"
                 value={portfolioUrl}
@@ -240,6 +249,17 @@ export default function ProfileForm() {
           {/* STEP 3 */}
           {step === 3 && (
             <div className="space-y-4">
+              <div>
+                <CardTitle>
+                  Social Profiles
+                </CardTitle>
+
+                <CardDescription>
+                  Connect your social media and coding platforms
+                </CardDescription>
+
+                <hr className="my-6 " />
+              </div>
 
               <Input
                 placeholder="GitHub Username"
@@ -272,28 +292,48 @@ export default function ProfileForm() {
                   setInstagram(e.target.value)
                 }
               />
-
             </div>
           )}
 
           {/* STEP 4 */}
           {step === 4 && (
-            <SkillsSection/>
-            // <div className="space-y-4">
-            //   skills section coming soon...
-            // </div>
+            <div className="space-y-4">
+              <div>
+                <CardTitle>
+                  Skills & Technologies
+
+                </CardTitle>
+
+                <CardDescription>
+                  Select the skills you want to showcase
+                </CardDescription>
+
+                <hr className="my-6 " />
+              </div>
+              <SkillsSection />
+            </div>
           )}
 
           {/* STEP 5 */}
           {step === 5 && (
             <div className="space-y-4">
+              <div>
+                <CardTitle>
+                  Preview & Generate
+                </CardTitle>
+
+                <CardDescription>
+                  Your README is ready! Copy or download it below.
+                </CardDescription>
+
+                <hr className="my-6 " />
+              </div>
               <PreviewPanel />
             </div>
           )}
 
           {/* Navigation */}
           <div className="mt-8 flex justify-between">
-
             <Button
               variant="outline"
               disabled={step === 1}
@@ -301,7 +341,6 @@ export default function ProfileForm() {
             >
               Previous
             </Button>
-
             {step < 5 ? (
               <Button onClick={handleNext}>
                 Next
@@ -316,6 +355,6 @@ export default function ProfileForm() {
 
         </CardContent>
       </Card>
-    </div>
+    </div >
   );
 }

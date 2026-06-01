@@ -11,8 +11,8 @@ export default function SkillsSection() {
   const toggleSkill = useProfileStore((state) => state.toggleSkill);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-2 min-h-12 p-3 rounded-md border bg-muted/20 items-center">
+    <>
+     <div className="flex flex-wrap gap-2 min-h-12 p-3 rounded-md border bg-muted/20 items-center">
         {selectedSkills.length === 0 && (
           <p className="text-sm text-muted-foreground px-1">No skills selected yet.</p>
         )}
@@ -42,7 +42,7 @@ export default function SkillsSection() {
           )
         })}
       </div>
-      <SkillsStep />
-    </div>
+      <SkillsStep /> 
+    </>
   );
 }
