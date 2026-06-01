@@ -5,8 +5,8 @@ export const categorizedSkills: CategorizedSkills = {
     title: 'Programming Languages',
     skills: [
       'c',
-      'cplusplus',
-      'csharp',
+      'cpp',
+      'cs',
       'go',
       'java',
       'javascript',

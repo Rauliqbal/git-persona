@@ -21,6 +21,7 @@ import remarkGfm from "remark-gfm";
 import { Check, Copy, FileCode } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import rehypeRaw from "rehype-raw";
 
 export default function PreviewPanel() {
   const profile = useProfileStore();
@@ -58,7 +59,10 @@ export default function PreviewPanel() {
 
           <TabsContent value="preview">
             <div className="prose max-w-none dark:prose-invert">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
                 {markdown}
               </ReactMarkdown>
             </div>
