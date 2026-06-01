@@ -18,6 +18,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import ReadmePreview from "./readme-preview";
+import remarkGfm from "remark-gfm";
 
 export default function PreviewPanel() {
   const profile = useProfileStore();
@@ -38,10 +39,8 @@ export default function PreviewPanel() {
           </TabsList>
 
           <TabsContent value="preview">
-            {/* <ReadmePreview/> */}
-
             <div className="prose max-w-none dark:prose-invert">
-              <ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {markdown}
               </ReactMarkdown>
             </div>
