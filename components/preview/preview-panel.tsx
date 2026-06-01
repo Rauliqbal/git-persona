@@ -17,11 +17,9 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
-import ReadmePreview from "./readme-preview";
 import remarkGfm from "remark-gfm";
 import { Check, Copy, FileCode } from "lucide-react";
 import { Button } from "../ui/button";
-import { toast } from "sonner";
 import { useState } from "react";
 
 export default function PreviewPanel() {

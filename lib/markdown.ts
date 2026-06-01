@@ -14,6 +14,6 @@ ${profile.summary}
 
 ## Skills
 
-${profile.skills.map((s) => `- ${s}`).join("\n")}
+${profile.selectedSkills.map((s) => `- ${s}`).join("\n")}
 `;
 };
