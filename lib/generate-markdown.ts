@@ -14,8 +14,6 @@ export function generateMarkdown(profile: {
   linkedin: string;
   twitter: string;
   instagram: string;
-
-  skills: string[];
 }) {
   const sections: string[] = [];
 
