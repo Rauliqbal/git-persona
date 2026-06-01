@@ -19,8 +19,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import StepIndicator from "./step-indicator";
 import PreviewPanel from "../preview/preview-panel";
+import { Field, FieldGroup, FieldLabel } from "../ui/field";
 
 export default function ProfileForm() {
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const {
     step,
     nextStep,
@@ -28,6 +30,7 @@ export default function ProfileForm() {
 
     fullName,
     subtitle,
+    currLearning,
     summary,
     funFact,
 
@@ -44,6 +47,7 @@ export default function ProfileForm() {
 
     setFullName,
     setSubtitle,
+    setCurrLearning,
     setSummary,
     setFunFact,
 
@@ -77,6 +81,30 @@ export default function ProfileForm() {
     setSkillInput("");
   };
 
+  const validateStep = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (step === 1) {
+      if (!fullName.trim()) {
+        newErrors.fullName = "Full name is required";
+      }
+
+      if (!subtitle.trim()) {
+        newErrors.subtitle = "Subtitle is required";
+      }
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (!validateStep()) return;
+
+    nextStep();
+  };
+
   return (
     <div className="p-8">
       <StepIndicator currentStep={step} steps={steps} />
@@ -98,37 +126,94 @@ export default function ProfileForm() {
           {step === 1 && (
             <div className="space-y-4">
 
-              <Input
-                placeholder="John Doe"
-                value={fullName}
-                onChange={(e) =>
-                  setFullName(e.target.value)
-                }
-              />
+              <FieldGroup className="grid md:grid-cols-2 gap-4">
+                <Field data-invalid={!!errors.fullName}>
+                  <FieldLabel htmlFor="yourname">Yourname <span className="text-destructive">*</span></FieldLabel>
+                  <Input
+                    id="yourname"
+                    type="text"
+                    placeholder="John Doe"
+                    required
+                    value={fullName}
+                    onChange={(e) => {
+                      setFullName(e.target.value);
 
-              <Input
-                placeholder="Full Stack Developer"
-                value={subtitle}
-                onChange={(e) =>
-                  setSubtitle(e.target.value)
-                }
-              />
+                      if (errors.fullName) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          fullName: "",
+                        }));
+                      }
+                    }}
+                  />
 
-              <Textarea
-                placeholder="About yourself..."
-                value={summary}
-                onChange={(e) =>
-                  setSummary(e.target.value)
-                }
-              />
+                  {errors.fullName && (
+                    <p className="mt-1 text-sm text-destructive">
+                      {errors.fullName}
+                    </p>
+                  )}
+                </Field>
 
-              <Textarea
-                placeholder="Fun fact..."
-                value={funFact}
-                onChange={(e) =>
-                  setFunFact(e.target.value)
-                }
-              />
+                <Field data-invalid={!!errors.subtitle}>
+                  <FieldLabel htmlFor="subtitle">Subtitle <span className="text-destructive">*</span></FieldLabel>
+                  <Input
+                    id="subtitle"
+                    type="text"
+                    placeholder="a Full Stack Developer"
+                    required
+                    value={subtitle}
+                    onChange={(e) => {
+                      setSubtitle(e.target.value)
+
+                      if (errors.subtitle) {
+                        setErrors((prev) => ({
+                          ...prev,
+                          subtitle: "",
+                        }));
+                      }
+                    }}
+                  />
+                  {errors.subtitle && (
+                    <p className="mt-1 text-sm text-destructive">
+                      {errors.subtitle}
+                    </p>
+                  )}
+                </Field>
+              </FieldGroup>
+
+              <Field >
+                <FieldLabel htmlFor="summary">💬 summary </FieldLabel>
+                <Textarea
+                  placeholder="Brief description about yourself and what you're passionate about..."
+                  value={summary}
+                  onChange={(e) =>
+                    setSummary(e.target.value)
+                  }
+                />
+              </Field>
+
+              <Field >
+                <FieldLabel htmlFor="currLearning">🌱 I&apos;m currently learning</FieldLabel>
+                <Textarea
+                  placeholder="RESTFul APIs, GraphQL, and cloud deployment..."
+                  value={currLearning}
+                  onChange={(e) =>
+                    setCurrLearning(e.target.value)
+                  }
+                />
+              </Field>
+
+              <Field >
+                <FieldLabel htmlFor="funFact">⚡ Fun fact </FieldLabel>
+                <Textarea
+                  placeholder="I like to drink coffee while coding..."
+                  value={funFact}
+                  onChange={(e) =>
+                    setFunFact(e.target.value)
+                  }
+                />
+              </Field>
+
 
             </div>
           )}
@@ -246,7 +331,7 @@ export default function ProfileForm() {
           {/* STEP 5 */}
           {step === 5 && (
             <div className="space-y-4">
-             <PreviewPanel/>
+              <PreviewPanel />
             </div>
           )}
 
@@ -262,7 +347,7 @@ export default function ProfileForm() {
             </Button>
 
             {step < 5 ? (
-              <Button onClick={nextStep}>
+              <Button onClick={handleNext}>
                 Next
               </Button>
             ) : (

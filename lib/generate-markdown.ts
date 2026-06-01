@@ -3,6 +3,7 @@ export function generateMarkdown(profile: {
   subtitle: string;
   summary: string;
   funFact: string;
+  currLearning: string;
 
   portfolioUrl: string;
   blogUrl: string;
@@ -18,9 +19,7 @@ export function generateMarkdown(profile: {
   const sections: string[] = [];
 
   // Header
-  sections.push(
-    `# Hi 👋, I'm ${profile.fullName || "Developer"}`
-  );
+  sections.push(`# Hi 👋, I'm ${profile.fullName || "Developer"}`);
 
   if (profile.subtitle) {
     sections.push(profile.subtitle);
@@ -32,6 +31,15 @@ export function generateMarkdown(profile: {
 ## 🚀 About Me
 
 ${profile.summary}
+`);
+  }
+
+  // Currently Learning
+  if(profile.currLearning) {
+    sections.push(`
+## 📚 Currently Learning
+
+${profile.currLearning}
 `);
   }
 
@@ -71,27 +79,19 @@ ${links.join("\n")}
   const socials: string[] = [];
 
   if (profile.github) {
-    socials.push(
-      `- GitHub: https://github.com/${profile.github}`
-    );
+    socials.push(`- GitHub: https://github.com/${profile.github}`);
   }
 
   if (profile.linkedin) {
-    socials.push(
-      `- LinkedIn: https://linkedin.com/in/${profile.linkedin}`
-    );
+    socials.push(`- LinkedIn: https://linkedin.com/in/${profile.linkedin}`);
   }
 
   if (profile.twitter) {
-    socials.push(
-      `- Twitter: https://twitter.com/${profile.twitter}`
-    );
+    socials.push(`- Twitter: https://twitter.com/${profile.twitter}`);
   }
 
   if (profile.instagram) {
-    socials.push(
-      `- Instagram: https://instagram.com/${profile.instagram}`
-    );
+    socials.push(`- Instagram: https://instagram.com/${profile.instagram}`);
   }
 
   if (socials.length > 0) {
@@ -107,9 +107,7 @@ ${socials.join("\n")}
     sections.push(`
 ## 🛠 Skills
 
-${profile.skills
-  .map((skill) => `- ${skill}`)
-  .join("\n")}
+${profile.skills.map((skill) => `- ${skill}`).join("\n")}
 `);
   }
 

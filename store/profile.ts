@@ -9,6 +9,7 @@ interface ProfileStore {
 
   fullName: string;
   subtitle: string;
+  currLearning: string;
   summary: string;
   funFact: string;
 
@@ -25,6 +26,7 @@ interface ProfileStore {
 
   setFullName: (v: string) => void;
   setSubtitle: (v: string) => void;
+  setCurrLearning : (v: string) => void;
   setSummary: (v: string) => void;
   setFunFact: (v: string) => void;
 
@@ -58,6 +60,7 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 
   fullName: "",
   subtitle: "",
+  currLearning: "",
   summary: "",
   funFact: "",
 
@@ -74,6 +77,7 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 
   setFullName: (v) => set({ fullName: v }),
   setSubtitle: (v) => set({ subtitle: v }),
+  setCurrLearning: (v) => set({ currLearning: v }),
   setSummary: (v) => set({ summary: v }),
   setFunFact: (v) => set({ funFact: v }),
 
