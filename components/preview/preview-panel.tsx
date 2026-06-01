@@ -17,6 +17,7 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
+import ReadmePreview from "./readme-preview";
 
 export default function PreviewPanel() {
   const profile = useProfileStore();
@@ -37,6 +38,8 @@ export default function PreviewPanel() {
           </TabsList>
 
           <TabsContent value="preview">
+            {/* <ReadmePreview/> */}
+
             <div className="prose max-w-none dark:prose-invert">
               <ReactMarkdown>
                 {markdown}

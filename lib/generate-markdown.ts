@@ -15,33 +15,103 @@ export function generateMarkdown(profile: {
 
   skills: string[];
 }) {
-  return `# Hi 👋, I'm ${profile.fullName}
+  const sections: string[] = [];
 
-${profile.subtitle}
+  // Header
+  sections.push(
+    `# Hi 👋, I'm ${profile.fullName || "Developer"}`
+  );
 
+  if (profile.subtitle) {
+    sections.push(profile.subtitle);
+  }
+
+  // About
+  if (profile.summary) {
+    sections.push(`
 ## 🚀 About Me
 
 ${profile.summary}
+`);
+  }
 
+  // Fun Fact
+  if (profile.funFact) {
+    sections.push(`
 ## ⚡ Fun Fact
 
 ${profile.funFact}
+`);
+  }
 
+  // Links
+  const links: string[] = [];
+
+  if (profile.portfolioUrl) {
+    links.push(`- Portfolio: ${profile.portfolioUrl}`);
+  }
+
+  if (profile.blogUrl) {
+    links.push(`- Blog: ${profile.blogUrl}`);
+  }
+
+  if (profile.resumeUrl) {
+    links.push(`- Resume: ${profile.resumeUrl}`);
+  }
+
+  if (links.length > 0) {
+    sections.push(`
 ## 🔗 Links
 
-- Portfolio: ${profile.portfolioUrl}
-- Blog: ${profile.blogUrl}
-- Resume: ${profile.resumeUrl}
+${links.join("\n")}
+`);
+  }
 
+  // Social Media
+  const socials: string[] = [];
+
+  if (profile.github) {
+    socials.push(
+      `- GitHub: https://github.com/${profile.github}`
+    );
+  }
+
+  if (profile.linkedin) {
+    socials.push(
+      `- LinkedIn: https://linkedin.com/in/${profile.linkedin}`
+    );
+  }
+
+  if (profile.twitter) {
+    socials.push(
+      `- Twitter: https://twitter.com/${profile.twitter}`
+    );
+  }
+
+  if (profile.instagram) {
+    socials.push(
+      `- Instagram: https://instagram.com/${profile.instagram}`
+    );
+  }
+
+  if (socials.length > 0) {
+    sections.push(`
 ## 🌐 Connect With Me
 
-- GitHub: https://github.com/${profile.github}
-- LinkedIn: https://linkedin.com/in/${profile.linkedin}
-- Twitter: https://twitter.com/${profile.twitter}
-- Instagram: https://instagram.com/${profile.instagram}
+${socials.join("\n")}
+`);
+  }
 
+  // Skills
+  if (profile.skills.length > 0) {
+    sections.push(`
 ## 🛠 Skills
 
-${profile.skills.map((s) => `- ${s}`).join("\n")}
-`;
+${profile.skills
+  .map((skill) => `- ${skill}`)
+  .join("\n")}
+`);
+  }
+
+  return sections.join("\n");
 }
