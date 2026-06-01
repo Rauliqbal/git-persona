@@ -26,8 +26,7 @@ export default function PreviewPanel() {
   return (
     <Card>
       <CardContent className="pt-6">
-
-        <Tabs orientation="horizontal" defaultValue="preview">
+        <Tabs className="flex-col" defaultValue="preview">
           <TabsList className="mb-4">
             <TabsTrigger value="preview">
               Preview
@@ -36,7 +35,6 @@ export default function PreviewPanel() {
               Markdown
             </TabsTrigger>
           </TabsList>
-
 
           <TabsContent value="preview">
             <div className="prose max-w-none dark:prose-invert">
@@ -62,7 +60,6 @@ export default function PreviewPanel() {
           </TabsContent>
 
         </Tabs>
-
       </CardContent>
     </Card>
   );
