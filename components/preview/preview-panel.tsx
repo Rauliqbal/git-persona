@@ -19,14 +19,34 @@ import {
 } from "@/components/ui/card";
 import ReadmePreview from "./readme-preview";
 import remarkGfm from "remark-gfm";
+import { Check, Copy, FileCode } from "lucide-react";
+import { Button } from "../ui/button";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export default function PreviewPanel() {
   const profile = useProfileStore();
+  const [copied, setCopied] = useState(false);
 
   const markdown = generateMarkdown(profile);
 
+
+  const handleCopyMarkdown = async () => {
+    try {
+      await navigator.clipboard.writeText(markdown);
+
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <Card>
+    <Card className="pb-0">
       <CardContent className="pt-6">
         <Tabs className="flex-col" defaultValue="preview">
           <TabsList className="mb-4">
@@ -61,8 +81,33 @@ export default function PreviewPanel() {
             />
           </TabsContent>
 
+
+
         </Tabs>
       </CardContent>
+
+      <div className="p-4 bg-slate-900 flex items-center justify-between">
+        <div className="flex items-center gap-3 text-slate-400">
+          <FileCode className="text-xl" />
+          <span className="text-sm font-medium">README.md ready to copy</span>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={handleCopyMarkdown}
+        >
+          {copied ? (
+            <>
+              <Check className="size-4" />
+              Copied
+            </>
+          ) : (
+            <>
+              <Copy className="size-4" />
+              Copy Code
+            </>
+          )}
+        </Button>
+      </div>
     </Card>
   );
 }
