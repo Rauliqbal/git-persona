@@ -22,7 +22,7 @@ interface ProfileStore {
   twitter: string;
   instagram: string;
 
-  skills: string[];
+  selectedSkills: string[];
 
   setFullName: (v: string) => void;
   setSubtitle: (v: string) => void;
@@ -39,8 +39,7 @@ interface ProfileStore {
   setTwitter: (v: string) => void;
   setInstagram: (v: string) => void;
 
-  addSkill: (skill: string) => void;
-  removeSkill: (skill: string) => void;
+  toggleSkill: (skill: string) => void;
 }
 
 export const useProfileStore = create<ProfileStore>((set) => ({
@@ -73,7 +72,7 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   twitter: "",
   instagram: "",
 
-  skills: [],
+  selectedSkills: [],
 
   setFullName: (v) => set({ fullName: v }),
   setSubtitle: (v) => set({ subtitle: v }),
@@ -90,13 +89,11 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   setTwitter: (v) => set({ twitter: v }),
   setInstagram: (v) => set({ instagram: v }),
 
-  addSkill: (skill) =>
+  toggleSkill: (skill: string) =>
     set((state) => ({
-      skills: [...state.skills, skill],
+      selectedSkills: state.selectedSkills.includes(skill)
+        ? state.selectedSkills.filter((s) => s !== skill)
+        : [...state.selectedSkills, skill],
     })),
-
-  removeSkill: (skill) =>
-    set((state) => ({
-      skills: state.skills.filter((s) => s !== skill),
-    })),
+  
 }));

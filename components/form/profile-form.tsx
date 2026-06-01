@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useProfileStore } from "@/store/profile";
 
@@ -16,10 +16,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import StepIndicator from "./step-indicator";
 import PreviewPanel from "../preview/preview-panel";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import SkillsSection from "./skills-section";
 
 export default function ProfileForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -43,8 +43,6 @@ export default function ProfileForm() {
     twitter,
     instagram,
 
-    skills,
-
     setFullName,
     setSubtitle,
     setCurrLearning,
@@ -59,12 +57,9 @@ export default function ProfileForm() {
     setLinkedin,
     setTwitter,
     setInstagram,
-
-    addSkill,
-    removeSkill,
   } = useProfileStore();
 
-  const [skillInput, setSkillInput] = useState("");
+
 
   const steps = [
     "Profile",
@@ -73,13 +68,6 @@ export default function ProfileForm() {
     "Skills",
     "Preview",
   ];
-
-  const handleAddSkill = () => {
-    if (!skillInput.trim()) return;
-
-    addSkill(skillInput.trim());
-    setSkillInput("");
-  };
 
   const validateStep = () => {
     const newErrors: Record<string, string> = {};
@@ -106,7 +94,7 @@ export default function ProfileForm() {
   };
 
   return (
-    <div className="p-8">
+    <div className="md:p-8 max-w-7xl mx-auto">
       <StepIndicator currentStep={step} steps={steps} />
 
       <Card>
@@ -290,42 +278,10 @@ export default function ProfileForm() {
 
           {/* STEP 4 */}
           {step === 4 && (
-            <div className="space-y-4">
-
-              <div className="flex gap-2">
-
-                <Input
-                  placeholder="Next.js"
-                  value={skillInput}
-                  onChange={(e) =>
-                    setSkillInput(e.target.value)
-                  }
-                />
-
-                <Button
-                  type="button"
-                  onClick={handleAddSkill}
-                >
-                  Add
-                </Button>
-
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <Badge
-                    key={skill}
-                    className="cursor-pointer"
-                    onClick={() =>
-                      removeSkill(skill)
-                    }
-                  >
-                    {skill} ✕
-                  </Badge>
-                ))}
-              </div>
-
-            </div>
+            <SkillsSection/>
+            // <div className="space-y-4">
+            //   skills section coming soon...
+            // </div>
           )}
 
           {/* STEP 5 */}

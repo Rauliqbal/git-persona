@@ -37,10 +37,10 @@ export default function StepIndicator({
               key={step}
               className="flex min-w-max items-center"
             >
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center text-[10px] md:text-base">
                 <div
                   className={cn(
-                    "flex h-12 w-12 items-center justify-center rounded-full border-2 font-semibold transition-all",
+                    "flex md:h-12 md:w-12 w-8 h-8 items-center justify-center rounded-full border-2 font-semibold transition-all",
                     isActive &&
                     "border-primary bg-primary text-primary-foreground",
                     isCompleted &&
@@ -57,7 +57,7 @@ export default function StepIndicator({
                   )}
                 </div>
 
-                <div className="mt-3 text-center">
+                <div className="mt-3 text-center ">
                   <p
                     className={cn(
                       "text-sm font-medium",
@@ -69,7 +69,7 @@ export default function StepIndicator({
                     {step}
                   </p>
 
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground hidden md:block">
                     {descriptions[index]}
                   </p>
                 </div>
