@@ -1,4 +1,5 @@
 export function generateMarkdown(profile: {
+  selectedSkills: string[];
   fullName: string;
   subtitle: string;
   summary: string;
@@ -103,13 +104,13 @@ ${socials.join("\n")}
   }
 
   // Skills
-  if (profile.skills.length > 0) {
+  if (profile.selectedSkills.length > 0) {
     sections.push(`
-## 🛠 Skills
+## 🛠 Tech Stack
 
-${profile.skills.map((skill) => `- ${skill}`).join("\n")}
+![My Skills](https://skillicons.dev/icons?i=${profile.selectedSkills.join(",")})
 `);
-  }
+}
 
   return sections.join("\n");
 }
