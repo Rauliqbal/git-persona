@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useProfileStore } from "@/store/profile";
 
@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
@@ -18,8 +17,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import StepIndicator from "./step-indicator";
 import PreviewPanel from "../preview/preview-panel";
-import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "../ui/field";
 import SkillsSection from "./skills-section";
+import { Separator } from "../ui/separator";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { BadgeInfo, Check, X } from "lucide-react";
 
 export default function ProfileForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -110,10 +112,10 @@ export default function ProfileForm() {
                   your custom GitHub README.
                 </CardDescription>
 
-                <hr className="my-6 " />
+                <Separator className="my-6 " />
               </div>
 
-              <FieldGroup className="grid md:grid-cols-2 gap-4">
+              <FieldGroup className="grid md:grid-cols-2 gap-4 mb-7">
                 <Field data-invalid={!!errors.fullName}>
                   <FieldLabel htmlFor="yourname">Yourname <span className="text-destructive">*</span></FieldLabel>
                   <Input
@@ -168,40 +170,40 @@ export default function ProfileForm() {
                 </Field>
               </FieldGroup>
 
-              <Field >
-                <FieldLabel htmlFor="summary">💬 summary </FieldLabel>
-                <Textarea
-                  placeholder="Brief description about yourself and what you're passionate about..."
-                  value={summary}
-                  onChange={(e) =>
-                    setSummary(e.target.value)
-                  }
-                />
-              </Field>
+              <FieldGroup>
+                <Field >
+                  <FieldLabel htmlFor="summary">💬 summary </FieldLabel>
+                  <Textarea
+                    placeholder="Brief description about yourself and what you're passionate about..."
+                    value={summary}
+                    onChange={(e) =>
+                      setSummary(e.target.value)
+                    }
+                  />
+                </Field>
 
-              <Field >
-                <FieldLabel htmlFor="currLearning">🌱 I&apos;m currently learning</FieldLabel>
-                <Textarea
-                  placeholder="RESTFul APIs, GraphQL, and cloud deployment..."
-                  value={currLearning}
-                  onChange={(e) =>
-                    setCurrLearning(e.target.value)
-                  }
-                />
-              </Field>
+                <Field >
+                  <FieldLabel htmlFor="currLearning">🌱 I&apos;m currently learning</FieldLabel>
+                  <Textarea
+                    placeholder="RESTFul APIs, GraphQL, and cloud deployment..."
+                    value={currLearning}
+                    onChange={(e) =>
+                      setCurrLearning(e.target.value)
+                    }
+                  />
+                </Field>
 
-              <Field >
-                <FieldLabel htmlFor="funFact">⚡ Fun fact </FieldLabel>
-                <Textarea
-                  placeholder="I like to drink coffee while coding..."
-                  value={funFact}
-                  onChange={(e) =>
-                    setFunFact(e.target.value)
-                  }
-                />
-              </Field>
-
-
+                <Field >
+                  <FieldLabel htmlFor="funFact">⚡ Fun fact </FieldLabel>
+                  <Textarea
+                    placeholder="I like to drink coffee while coding..."
+                    value={funFact}
+                    onChange={(e) =>
+                      setFunFact(e.target.value)
+                    }
+                  />
+                </Field>
+              </FieldGroup>
             </div>
           )}
 
@@ -212,37 +214,52 @@ export default function ProfileForm() {
                 <CardTitle>
                   Links
                 </CardTitle>
-
                 <CardDescription>
                   Add links to your portfolio, blog, and resume
                 </CardDescription>
-
-                <hr className="my-6 " />
+                <Separator className="my-6 " />
               </div>
-              <Input
-                placeholder="Portfolio URL"
-                value={portfolioUrl}
-                onChange={(e) =>
-                  setPortfolioUrl(e.target.value)
-                }
-              />
-
-              <Input
-                placeholder="Blog URL"
-                value={blogUrl}
-                onChange={(e) =>
-                  setBlogUrl(e.target.value)
-                }
-              />
-
-              <Input
-                placeholder="Resume URL"
-                value={resumeUrl}
-                onChange={(e) =>
-                  setResumeUrl(e.target.value)
-                }
-              />
-
+              <FieldGroup>
+                <Field >
+                  <FieldLabel htmlFor="summary">👨‍💻 Portfolio </FieldLabel>
+                  <Input
+                    placeholder="https://yourportfolio.com"
+                    value={portfolioUrl}
+                    onChange={(e) =>
+                      setPortfolioUrl(e.target.value)
+                    }
+                  />
+                  <FieldDescription>
+                    Your personal website or portfolio
+                  </FieldDescription>
+                </Field>
+                <Field >
+                  <FieldLabel htmlFor="summary">📝 Blog</FieldLabel>
+                  <Input
+                    placeholder="https://your-blog.com"
+                    value={blogUrl}
+                    onChange={(e) =>
+                      setBlogUrl(e.target.value)
+                    }
+                  />
+                  <FieldDescription>
+                    Where you write articles
+                  </FieldDescription>
+                </Field>
+                <Field >
+                  <FieldLabel htmlFor="summary">👨‍💻 Portfolio </FieldLabel>
+                  <Input
+                    placeholder="https://drive.google.com/your-resume"
+                    value={resumeUrl}
+                    onChange={(e) =>
+                      setResumeUrl(e.target.value)
+                    }
+                  />
+                  <FieldDescription>
+                    Link to your resume or CV
+                  </FieldDescription>
+                </Field>
+              </FieldGroup>
             </div>
           )}
 
@@ -253,13 +270,23 @@ export default function ProfileForm() {
                 <CardTitle>
                   Social Profiles
                 </CardTitle>
-
                 <CardDescription>
                   Connect your social media and coding platforms
                 </CardDescription>
-
-                <hr className="my-6 " />
+                <Separator className="my-6 " />
               </div>
+
+              <Alert className="bg-blue-100/70 border-blue-500">
+                <BadgeInfo />
+                <AlertTitle>Enter usernames only, not full URLs</AlertTitle>
+                <AlertDescription>
+                  Just provide your username or handle for each platform. We&apos;ll automatically generate the correct URLs.
+                  <ul className="mt-2">
+                    <li className="flex items-center gap-2"> <Check size={18} className="text-green-500" /> <b>Correct: </b> johndoe</li>
+                    <li className="flex items-center gap-2"> <X size={18} className="text-red-500" /> <b>Incorrect:</b> https://twitter.com/johndoe</li>
+                  </ul>
+                </AlertDescription>
+              </Alert>
 
               <Input
                 placeholder="GitHub Username"
@@ -268,7 +295,6 @@ export default function ProfileForm() {
                   setGithub(e.target.value)
                 }
               />
-
               <Input
                 placeholder="LinkedIn Username"
                 value={linkedin}
@@ -276,7 +302,6 @@ export default function ProfileForm() {
                   setLinkedin(e.target.value)
                 }
               />
-
               <Input
                 placeholder="Twitter / X Username"
                 value={twitter}
@@ -308,7 +333,7 @@ export default function ProfileForm() {
                   Select the skills you want to showcase
                 </CardDescription>
 
-                <hr className="my-6 " />
+                <Separator className="my-6 " />
               </div>
               <SkillsSection />
             </div>
@@ -326,7 +351,7 @@ export default function ProfileForm() {
                   Your README is ready! Copy or download it below.
                 </CardDescription>
 
-                <hr className="my-6 " />
+                <Separator className="my-6 " />
               </div>
               <PreviewPanel />
             </div>

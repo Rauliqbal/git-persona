@@ -15,10 +15,9 @@ import {
 
 import {
   Card,
-  CardContent,
 } from "@/components/ui/card";
 import remarkGfm from "remark-gfm";
-import { Check, Copy, FileCode } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import rehypeRaw from "rehype-raw";
