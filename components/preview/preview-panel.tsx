@@ -15,12 +15,12 @@ import {
 
 import {
   Card,
-  CardContent,
 } from "@/components/ui/card";
 import remarkGfm from "remark-gfm";
-import { Check, Copy, FileCode } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import rehypeRaw from "rehype-raw";
 
 export default function PreviewPanel() {
   const profile = useProfileStore();
@@ -44,9 +44,9 @@ export default function PreviewPanel() {
   };
 
   return (
-    <Card className="pb-0">
-      <CardContent className="pt-6">
-        <Tabs className="flex-col" defaultValue="preview">
+    <div className="pb-0">
+      <Tabs className="flex-col" defaultValue="preview">
+        <div className="flex justify-between gap-4">
           <TabsList className="mb-4">
             <TabsTrigger value="preview">
               Preview
@@ -56,12 +56,34 @@ export default function PreviewPanel() {
             </TabsTrigger>
           </TabsList>
 
+          <Button
+            variant="secondary"
+            onClick={handleCopyMarkdown}
+          >
+            {copied ? (
+              <>
+                <Check className="size-4" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="size-4" />
+                Copy Code
+              </>
+            )}
+          </Button>
+        </div>
+
+        <Card>
           <TabsContent value="preview">
-            <div className="prose max-w-none dark:prose-invert">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <article className="markdown-body p-4">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
                 {markdown}
               </ReactMarkdown>
-            </div>
+            </article>
           </TabsContent>
 
           <TabsContent value="markdown">
@@ -78,34 +100,8 @@ export default function PreviewPanel() {
               }}
             />
           </TabsContent>
-
-
-
-        </Tabs>
-      </CardContent>
-
-      <div className="p-4 bg-slate-900 flex items-center justify-between">
-        <div className="flex items-center gap-3 text-slate-400">
-          <FileCode className="text-xl" />
-          <span className="text-sm font-medium">README.md ready to copy</span>
-        </div>
-        <Button
-          variant="secondary"
-          onClick={handleCopyMarkdown}
-        >
-          {copied ? (
-            <>
-              <Check className="size-4" />
-              Copied
-            </>
-          ) : (
-            <>
-              <Copy className="size-4" />
-              Copy Code
-            </>
-          )}
-        </Button>
-      </div>
-    </Card>
+        </Card>
+      </Tabs>
+    </div>
   );
 }
