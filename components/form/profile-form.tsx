@@ -288,35 +288,48 @@ export default function ProfileForm() {
                 </AlertDescription>
               </Alert>
 
-              <Input
-                placeholder="GitHub Username"
-                value={github}
-                onChange={(e) =>
-                  setGithub(e.target.value)
-                }
-              />
-              <Input
-                placeholder="LinkedIn Username"
-                value={linkedin}
-                onChange={(e) =>
-                  setLinkedin(e.target.value)
-                }
-              />
-              <Input
-                placeholder="Twitter / X Username"
-                value={twitter}
-                onChange={(e) =>
-                  setTwitter(e.target.value)
-                }
-              />
-
-              <Input
-                placeholder="Instagram Username"
+              <FieldGroup>
+                <Field >
+                  <FieldLabel htmlFor="summary">🐙 Github</FieldLabel>
+                  <Input
+                    placeholder="JohnDoe"
+                    value={github}
+                    onChange={(e) =>
+                      setGithub(e.target.value)
+                    }
+                  />
+                </Field>
+                <Field >
+                  <FieldLabel htmlFor="summary">💼 LinkedIn</FieldLabel>
+                  <Input
+                    placeholder="john-doe"
+                    value={linkedin}
+                    onChange={(e) =>
+                      setLinkedin(e.target.value)
+                    }
+                  />
+                </Field>
+                <Field >
+                  <FieldLabel htmlFor="summary">🐦 Twitter / X</FieldLabel>
+                  <Input
+                    placeholder="john-doe"
+                    value={linkedin}
+                    onChange={(e) =>
+                      setLinkedin(e.target.value)
+                    }
+                  />
+                </Field>
+                <Field >
+                  <FieldLabel htmlFor="summary">📷 Instagram</FieldLabel>
+                  <Input
+                placeholder="username"
                 value={instagram}
                 onChange={(e) =>
                   setInstagram(e.target.value)
                 }
               />
+                </Field>
+              </FieldGroup>
             </div>
           )}
 
