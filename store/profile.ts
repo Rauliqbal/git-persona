@@ -8,7 +8,9 @@ interface ProfileStore {
   setStep: (step: number) => void;
 
   fullName: string;
-  subtitle: string;
+  title: string;
+  company: string;
+  location: string;
   currLearning: string;
   summary: string;
   funFact: string;
@@ -25,8 +27,10 @@ interface ProfileStore {
   selectedSkills: string[];
 
   setFullName: (v: string) => void;
-  setSubtitle: (v: string) => void;
-  setCurrLearning : (v: string) => void;
+  settitle: (v: string) => void;
+  setCompany: (v: string) => void;
+  setLocation: (v: string) => void;
+  setCurrLearning: (v: string) => void;
   setSummary: (v: string) => void;
   setFunFact: (v: string) => void;
 
@@ -58,7 +62,9 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   setStep: (step) => set({ step }),
 
   fullName: "",
-  subtitle: "",
+  title: "",
+  location: "",
+  company: "",
   currLearning: "",
   summary: "",
   funFact: "",
@@ -75,7 +81,9 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   selectedSkills: [],
 
   setFullName: (v) => set({ fullName: v }),
-  setSubtitle: (v) => set({ subtitle: v }),
+  settitle: (v) => set({ title: v }),
+  setCompany: (v) => set({ company: v }),
+  setLocation: (v) => set({ location: v }),
   setCurrLearning: (v) => set({ currLearning: v }),
   setSummary: (v) => set({ summary: v }),
   setFunFact: (v) => set({ funFact: v }),
@@ -95,5 +103,4 @@ export const useProfileStore = create<ProfileStore>((set) => ({
         ? state.selectedSkills.filter((s) => s !== skill)
         : [...state.selectedSkills, skill],
     })),
-  
 }));

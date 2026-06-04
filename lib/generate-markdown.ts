@@ -258,7 +258,9 @@ export function getSkillIconUrl(skill: string): string {
 export function generateMarkdown(profile: {
   selectedSkills: string[];
   fullName: string;
-  subtitle: string;
+  title: string;
+  company: string;
+  location: string;
   summary: string;
   funFact: string;
   currLearning: string;
@@ -275,60 +277,55 @@ export function generateMarkdown(profile: {
   const sections: string[] = [];
 
   // Header
-  sections.push(`# Hi 👋, I'm ${profile.fullName || "Developer"}`);
+  sections.push(`<h1 align="center">Hi 👋, I'm ${profile.fullName}, ${profile.title}</h1>` );
 
-  if (profile.subtitle) {
-    sections.push(profile.subtitle);
-  }
-
-  // About
-  if (profile.summary) {
-    sections.push(`
-## 🚀 About Me
-
-${profile.summary}
-`);
-  }
-
-  // Currently Learning
-  if (profile.currLearning) {
-    sections.push(`
-## 📚 Currently Learning
-
-${profile.currLearning}
-`);
-  }
-
-  // Fun Fact
-  if (profile.funFact) {
-    sections.push(`
-## ⚡ Fun Fact
-
-${profile.funFact}
-`);
-  }
-
-  // Links
+   // Links
   const links: string[] = [];
 
-  if (profile.portfolioUrl) {
-    links.push(`- Portfolio: ${profile.portfolioUrl}`);
-  }
-
-  if (profile.blogUrl) {
-    links.push(`- Blog: ${profile.blogUrl}`);
-  }
-
-  if (profile.resumeUrl) {
-    links.push(`- Resume: ${profile.resumeUrl}`);
+  if (profile.portfolioUrl || profile.blogUrl || profile.resumeUrl) {
+    links.push(`<a href="https://${profile.portfolioUrl}">Website</a> •`);
+    links.push(`<a href="${profile.blogUrl}">Blog</a> •`);
+    links.push(`<a href="${profile.resumeUrl}">Resume</a>`);
   }
 
   if (links.length > 0) {
     sections.push(`
-## 🔗 Links
-
+<p align="center">
 ${links.join("\n")}
+</p>
 `);
+  }
+
+
+  // About
+  if (profile.summary) {
+    sections.push(`
+---
+
+${profile.summary}
+
+---
+`);
+  }
+
+  // Currently Working
+  if (profile.company) {
+    sections.push(`- 🔭 Currently working as **${profile.title}** at **${profile.company}**`);
+  }
+
+  // Currently Learning
+  if (profile.currLearning) {
+    sections.push(`- 📚 Currently Learning: **${profile.currLearning}**`);
+  } 
+  
+  // Location
+  if(profile.location) {
+    sections.push(`- 📍 Based in **${profile.location}**`)
+  }
+
+  // Fun Fact
+  if (profile.funFact) {
+    sections.push(`- ⚡ Fun Fact: **${profile.funFact}**`);
   }
 
   // Social Media
@@ -337,15 +334,12 @@ ${links.join("\n")}
   if (profile.github) {
     socials.push(`- GitHub: https://github.com/${profile.github}`);
   }
-
   if (profile.linkedin) {
     socials.push(`- LinkedIn: https://linkedin.com/in/${profile.linkedin}`);
   }
-
   if (profile.twitter) {
     socials.push(`- Twitter: https://twitter.com/${profile.twitter}`);
   }
-
   if (profile.instagram) {
     socials.push(`- Instagram: https://instagram.com/${profile.instagram}`);
   }
