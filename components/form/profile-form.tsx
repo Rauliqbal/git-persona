@@ -31,7 +31,9 @@ export default function ProfileForm() {
     prevStep,
 
     fullName,
-    subtitle,
+    title,
+    location,
+    company,
     currLearning,
     summary,
     funFact,
@@ -46,7 +48,9 @@ export default function ProfileForm() {
     instagram,
 
     setFullName,
-    setSubtitle,
+    settitle,
+    setLocation,
+    setCompany,
     setCurrLearning,
     setSummary,
     setFunFact,
@@ -77,8 +81,8 @@ export default function ProfileForm() {
         newErrors.fullName = "Full name is required";
       }
 
-      if (!subtitle.trim()) {
-        newErrors.subtitle = "Subtitle is required";
+      if (!title.trim()) {
+        newErrors.title = "title is required";
       }
     }
 
@@ -143,33 +147,57 @@ export default function ProfileForm() {
                   )}
                 </Field>
 
-                <Field data-invalid={!!errors.subtitle}>
-                  <FieldLabel htmlFor="subtitle">Subtitle <span className="text-destructive">*</span></FieldLabel>
+                <Field data-invalid={!!errors.title}>
+                  <FieldLabel htmlFor="title">Title / Role <span className="text-destructive">*</span></FieldLabel>
                   <Input
-                    id="subtitle"
+                    id="title"
                     type="text"
-                    placeholder="a Full Stack Developer"
+                    placeholder="Full Stack Developer"
                     required
-                    value={subtitle}
+                    value={title}
                     onChange={(e) => {
-                      setSubtitle(e.target.value)
+                      settitle(e.target.value)
 
-                      if (errors.subtitle) {
+                      if (errors.title) {
                         setErrors((prev) => ({
                           ...prev,
-                          subtitle: "",
+                          title: "",
                         }));
                       }
                     }}
                   />
-                  {errors.subtitle && (
+                  {errors.title && (
                     <p className="mt-1 text-sm text-destructive">
-                      {errors.subtitle}
+                      {errors.title}
                     </p>
                   )}
                 </Field>
-              </FieldGroup>
 
+                <Field >
+                  <FieldLabel htmlFor="lcoation">🌏 Location</FieldLabel>
+                  <Input
+                    id="lcoation"
+                    type="text"
+                    placeholder="Jakarta, Indonesia"
+                    required
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                  />
+                </Field>
+
+                <Field>
+                  <FieldLabel htmlFor="company">🏢 Company</FieldLabel>
+                  <Input
+                    id="company"
+                    type="text"
+                    placeholder="Tech Innovations Inc."
+                    required
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
+                </Field>
+
+              </FieldGroup>
               <FieldGroup>
                 <Field >
                   <FieldLabel htmlFor="summary">💬 summary </FieldLabel>
@@ -247,7 +275,7 @@ export default function ProfileForm() {
                   </FieldDescription>
                 </Field>
                 <Field >
-                  <FieldLabel htmlFor="summary">👨‍💻 Portfolio </FieldLabel>
+                  <FieldLabel htmlFor="summary">📃 Resume / CV </FieldLabel>
                   <Input
                     placeholder="https://drive.google.com/your-resume"
                     value={resumeUrl}
@@ -313,21 +341,21 @@ export default function ProfileForm() {
                   <FieldLabel htmlFor="summary">🐦 Twitter / X</FieldLabel>
                   <Input
                     placeholder="john-doe"
-                    value={linkedin}
+                    value={twitter}
                     onChange={(e) =>
-                      setLinkedin(e.target.value)
+                      setTwitter(e.target.value)
                     }
                   />
                 </Field>
                 <Field >
                   <FieldLabel htmlFor="summary">📷 Instagram</FieldLabel>
                   <Input
-                placeholder="username"
-                value={instagram}
-                onChange={(e) =>
-                  setInstagram(e.target.value)
-                }
-              />
+                    placeholder="username"
+                    value={instagram}
+                    onChange={(e) =>
+                      setInstagram(e.target.value)
+                    }
+                  />
                 </Field>
               </FieldGroup>
             </div>

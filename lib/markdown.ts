@@ -6,7 +6,7 @@ export const useMarkdown = () => {
   return `
 # Hi 👋, I'm ${profile.fullName}
 
-${profile.subtitle}
+${profile.title}
 
 ## About Me
 
