@@ -273,6 +273,8 @@ export function generateMarkdown(profile: {
   linkedin: string;
   twitter: string;
   instagram: string;
+  theme: string;
+  border: boolean;
 }) {
   const sections: string[] = [];
 
@@ -378,9 +380,9 @@ ${skillIcons}
 ## 🚀 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=${profile.github}&show_icons=true&theme=dark"/>
-  <img src="https://streak-stats.demolab.com/?user=${profile.github}&theme=dark"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${profile.github}&theme=dark&layout=compact"/>
+  <img src="https://github-readme-stats.shion.dev/api?username=${profile.github}&theme=${profile.theme}&hide_border=${profile.border}&include_all_commits=false&count_private=false"/>
+  <img src="https://streak-stats.demolab.com/?user=${profile.github}&theme=${profile.theme}&hide_border=${profile.border}"/>
+  <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=${profile.github}&theme=${profile.theme}&hide_border=${profile.border}&include_all_commits=false&count_private=false&layout=compact"/>
 </div>
 `);
   }
