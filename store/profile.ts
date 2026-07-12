@@ -23,6 +23,8 @@ interface ProfileStore {
   linkedin: string;
   twitter: string;
   instagram: string;
+  theme: string;
+  border: boolean
 
   selectedSkills: string[];
 
@@ -42,6 +44,8 @@ interface ProfileStore {
   setLinkedin: (v: string) => void;
   setTwitter: (v: string) => void;
   setInstagram: (v: string) => void;
+  setTheme: (v: string) => void;
+  setBorder: (v: boolean) => void;
 
   toggleSkill: (skill: string) => void;
 }
@@ -77,6 +81,8 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   linkedin: "",
   twitter: "",
   instagram: "",
+  theme: "dark",
+  border: true,
 
   selectedSkills: [],
 
@@ -96,6 +102,8 @@ export const useProfileStore = create<ProfileStore>((set) => ({
   setLinkedin: (v) => set({ linkedin: v }),
   setTwitter: (v) => set({ twitter: v }),
   setInstagram: (v) => set({ instagram: v }),
+  setTheme: (v) => set({ theme: v }),
+  setBorder: (v) => set({ border: v }),
 
   toggleSkill: (skill: string) =>
     set((state) => ({

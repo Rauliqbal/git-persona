@@ -22,6 +22,9 @@ import SkillsSection from "./skills-section";
 import { Separator } from "../ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { BadgeInfo, Check, X } from "lucide-react";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { themes } from "@/constant/themes";
+import { Switch } from "../ui/switch";
 
 export default function ProfileForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -65,6 +68,9 @@ export default function ProfileForm() {
     setInstagram,
   } = useProfileStore();
 
+  const [theme, setTheme] = useState("dark");
+  const [border, setBorder] = useState<boolean>(true);
+  const [loading, setLoading] = useState(false);
   const steps = [
     "Profile",
     "Links",
@@ -317,47 +323,127 @@ export default function ProfileForm() {
               </Alert>
 
               <FieldGroup>
-                <Field >
-                  <FieldLabel htmlFor="summary">🐙 Github</FieldLabel>
-                  <Input
-                    placeholder="JohnDoe"
-                    value={github}
-                    onChange={(e) =>
-                      setGithub(e.target.value)
-                    }
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <Field >
+                    <FieldLabel htmlFor="github">🐙 Github</FieldLabel>
+                    <Input
+                      placeholder="JohnDoe"
+                      id="github"
+                      value={github}
+                      onChange={(e) =>
+                        setGithub(e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field >
+                    <FieldLabel htmlFor="linkedin">💼 LinkedIn</FieldLabel>
+                    <Input
+                      id="linkedin"
+                      placeholder="john-doe"
+                      value={linkedin}
+                      onChange={(e) =>
+                        setLinkedin(e.target.value)
+                      }
+                    />
+                  </Field>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <Field >
+                    <FieldLabel htmlFor="x">🐦 Twitter / X</FieldLabel>
+                    <Input
+                      id="x"
+                      placeholder="john-doe"
+                      value={twitter}
+                      onChange={(e) =>
+                        setTwitter(e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field >
+                    <FieldLabel htmlFor="instagram">📷 Instagram</FieldLabel>
+                    <Input
+                      id="instagram"
+                      placeholder="username"
+                      value={instagram}
+                      onChange={(e) =>
+                        setInstagram(e.target.value)
+                      }
+                    />
+                  </Field>
+                </div>
+              </FieldGroup>
+
+              <FieldGroup className="grid grid-cols-2">
+                <Field>
+                  <FieldLabel htmlFor="instagram">Theme (GitHub Stats)</FieldLabel>
+
+                  <Select
+                    value={theme}
+                    onValueChange={(val) => {
+                      setTheme(val);
+                      setLoading(true);
+                      setTimeout(() => setLoading(false), 1500); // simulasi loading
+                    }}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {themes.map((item) => (
+                          <SelectItem key={item} value={item}>
+                            {item}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                 </Field>
-                <Field >
-                  <FieldLabel htmlFor="summary">💼 LinkedIn</FieldLabel>
-                  <Input
-                    placeholder="john-doe"
-                    value={linkedin}
-                    onChange={(e) =>
-                      setLinkedin(e.target.value)
-                    }
-                  />
-                </Field>
-                <Field >
-                  <FieldLabel htmlFor="summary">🐦 Twitter / X</FieldLabel>
-                  <Input
-                    placeholder="john-doe"
-                    value={twitter}
-                    onChange={(e) =>
-                      setTwitter(e.target.value)
-                    }
-                  />
-                </Field>
-                <Field >
-                  <FieldLabel htmlFor="summary">📷 Instagram</FieldLabel>
-                  <Input
-                    placeholder="username"
-                    value={instagram}
-                    onChange={(e) =>
-                      setInstagram(e.target.value)
-                    }
+
+                <Field orientation="vertical" className="w-fit">
+                  <FieldLabel htmlFor="border">Hide Border</FieldLabel>
+                  <Switch
+                    id="border"
+                    checked={border}
+                    onCheckedChange={(checked) => {
+                      setBorder(checked);
+                      setLoading(true);
+                      setTimeout(() => setLoading(false), 1500);
+                    }}
                   />
                 </Field>
               </FieldGroup>
+
+              {loading && (
+                <p className="text-sm text-gray-500 mt-2">
+                  please wait for images to load after changing any values...
+                </p>
+              )}
+
+              <div className="w-full mx-auto md:w-8/12 justify-center flex flex-col flex-wrap md:my-4">
+                <img
+                  className="m-2 select-none pointer-events-none"
+                  draggable="false"
+                  id="stats"
+                  src={`https://github-readme-stats.shion.dev/api?username=${github}&theme=${theme}&hide_border=${border}&include_all_commits=false&count_private=false`}
+                  alt="GitHub Stats"
+                />
+                <img
+                  className="m-2 select-none pointer-events-none"
+                  draggable="false"
+                  id="streak"
+                  src={`https://streak-stats.demolab.com/?user=${github}&theme=${theme}&hide_border=${border}`}
+                  alt="GitHub Streak"
+                />
+                <img
+                  className="m-2 select-none pointer-events-none"
+                  draggable="false"
+                  id="langs"
+                  src={`https://github-readme-stats.shion.dev/api/top-langs/?username=${github}&theme=${theme}&hide_border=${border}&include_all_commits=false&count_private=false&layout=compact`}
+                  alt="Top Languages"
+                />
+              </div>
             </div>
           )}
 
