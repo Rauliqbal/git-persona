@@ -1,5 +1,6 @@
 import { GitGraph } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -20,9 +21,11 @@ export default function Navbar() {
           <a href="#">Support</a>
         </nav>
 
-        <Button>
-          Star on GitHub
-        </Button>
+        <Link href="https://github.com/Rauliqbal/git-persona" target="_blank">
+          <Button>
+            Star on GitHub
+          </Button>
+          </Link>
       </div>
     </header>
   );
