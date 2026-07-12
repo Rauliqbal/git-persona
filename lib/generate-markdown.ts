@@ -277,9 +277,11 @@ export function generateMarkdown(profile: {
   const sections: string[] = [];
 
   // Header
-  sections.push(`<h1 align="center">Hi 👋, I'm ${profile.fullName}, ${profile.title}</h1>` );
+  sections.push(
+    `<h1 align="center">Hi 👋, I'm ${profile.fullName} a ${profile.title}</h1>`,
+  );
 
-   // Links
+  // Links
   const links: string[] = [];
 
   if (profile.portfolioUrl || profile.blogUrl || profile.resumeUrl) {
@@ -296,7 +298,6 @@ ${links.join("\n")}
 `);
   }
 
-
   // About
   if (profile.summary) {
     sections.push(`
@@ -310,17 +311,19 @@ ${profile.summary}
 
   // Currently Working
   if (profile.company) {
-    sections.push(`- 🔭 Currently working as **${profile.title}** at **${profile.company}**`);
+    sections.push(
+      `- 🔭 Currently working as **${profile.title}** at **${profile.company}**`,
+    );
   }
 
   // Currently Learning
   if (profile.currLearning) {
     sections.push(`- 📚 Currently Learning: **${profile.currLearning}**`);
-  } 
-  
+  }
+
   // Location
-  if(profile.location) {
-    sections.push(`- 📍 Based in **${profile.location}**`)
+  if (profile.location) {
+    sections.push(`- 📍 Based in **${profile.location}**`);
   }
 
   // Fun Fact
@@ -330,18 +333,18 @@ ${profile.summary}
 
   // Social Media
   const socials: string[] = [];
-
+  // <a href="https://${profile.portfolioUrl}">Website</a>
   if (profile.github) {
-    socials.push(`- GitHub: https://github.com/${profile.github}`);
+    socials.push(`- <a href="https://${profile.github}">🐙 GitHub</a>`);
   }
   if (profile.linkedin) {
-    socials.push(`- LinkedIn: https://linkedin.com/in/${profile.linkedin}`);
+    socials.push(`- <a href="https://${profile.linkedin}">💼 LinkedIn</a>`);
   }
   if (profile.twitter) {
-    socials.push(`- Twitter: https://twitter.com/${profile.twitter}`);
+    socials.push(`- <a href="https://${profile.twitter}">🦜 X/Twitter</a>`);
   }
   if (profile.instagram) {
-    socials.push(`- Instagram: https://instagram.com/${profile.instagram}`);
+    socials.push(`- <a href="https://${profile.instagram}">📷 Instagram</a>`);
   }
 
   if (socials.length > 0) {
@@ -353,21 +356,21 @@ ${socials.join("\n")}
   }
 
   // Skills
- if (profile.selectedSkills.length > 0) {
-  const skillIcons = profile.selectedSkills
-    .map((skill) => {
-      const iconUrl = getSkillIconUrl(skill);
-      return `<a href="https://developer.mozilla.org/en-US/docs/Web/${skill}" target="_blank" rel="noreferrer"> <img src="${iconUrl}" alt="${skill}" width="40" height="40"/> </a>`;
-    })
-    .join("\n");
+  if (profile.selectedSkills.length > 0) {
+    const skillIcons = profile.selectedSkills
+      .map((skill) => {
+        const iconUrl = getSkillIconUrl(skill);
+        return `<a href="https://developer.mozilla.org/en-US/docs/Web/${skill}" target="_blank" rel="noreferrer"> <img src="${iconUrl}" alt="${skill}" width="40" height="40"/> </a>`;
+      })
+      .join("\n");
 
-  sections.push(`
+    sections.push(`
 ## 🛠 Tech Stack
 
 <p align="left">
 ${skillIcons}
 </p>
 `);
-}
+  }
   return sections.join("\n");
 }

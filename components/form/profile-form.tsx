@@ -318,9 +318,10 @@ export default function ProfileForm() {
 
               <FieldGroup>
                 <Field >
-                  <FieldLabel htmlFor="summary">🐙 Github</FieldLabel>
+                  <FieldLabel htmlFor="github">🐙 Github</FieldLabel>
                   <Input
                     placeholder="JohnDoe"
+                    id="github"
                     value={github}
                     onChange={(e) =>
                       setGithub(e.target.value)
@@ -328,8 +329,9 @@ export default function ProfileForm() {
                   />
                 </Field>
                 <Field >
-                  <FieldLabel htmlFor="summary">💼 LinkedIn</FieldLabel>
+                  <FieldLabel htmlFor="linkedin">💼 LinkedIn</FieldLabel>
                   <Input
+                  id="linkedin"
                     placeholder="john-doe"
                     value={linkedin}
                     onChange={(e) =>
@@ -338,8 +340,9 @@ export default function ProfileForm() {
                   />
                 </Field>
                 <Field >
-                  <FieldLabel htmlFor="summary">🐦 Twitter / X</FieldLabel>
+                  <FieldLabel htmlFor="x">🐦 Twitter / X</FieldLabel>
                   <Input
+                  id="x"
                     placeholder="john-doe"
                     value={twitter}
                     onChange={(e) =>
@@ -348,7 +351,19 @@ export default function ProfileForm() {
                   />
                 </Field>
                 <Field >
-                  <FieldLabel htmlFor="summary">📷 Instagram</FieldLabel>
+                  <FieldLabel htmlFor="instagram">📷 Instagram</FieldLabel>
+                  <Input
+                  id="instagram"
+                    placeholder="username"
+                    value={instagram}
+                    onChange={(e) =>
+                      setInstagram(e.target.value)
+                    }
+                  />
+                </Field>
+
+                <Field >
+                  <FieldLabel htmlFor="summary">GitHub Stats</FieldLabel>
                   <Input
                     placeholder="username"
                     value={instagram}
