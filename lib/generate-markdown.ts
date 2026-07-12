@@ -372,5 +372,31 @@ ${skillIcons}
 </p>
 `);
   }
+
+  if (profile.github) {
+    sections.push(`
+## 🚀 GitHub Stats
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=${profile.github}&show_icons=true&theme=dark"/>
+  <img src="https://streak-stats.demolab.com/?user=${profile.github}&theme=dark"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${profile.github}&theme=dark&layout=compact"/>
+</div>
+`);
+  }
+
+  // Random Dev Quote
+  sections.push(`
+<div align="center">
+    <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dark"/>
+</div>
+`);
+
+  // Pacman Contribution Graph
+  //   sections.push(`
+  // ## 🎮 Pacman Contribution Graph
+  // ![Pacman](https://github.com/abozanona/pacman-contribution-graph/blob/output/github-contribution-grid-pacman.svg)
+  // `);
+
   return sections.join("\n");
 }
